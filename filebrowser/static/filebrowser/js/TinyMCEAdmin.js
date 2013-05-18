@@ -28,7 +28,6 @@ tinyMCE.init({
     // Init
     mode: 'textareas',
     theme: 'advanced',
-    skin: 'grappelli',
     
     // General
     //accessibility_warnings: false,
@@ -65,7 +64,7 @@ tinyMCE.init({
     // content_css : "css/example.css",
     
     // Plugins
-    plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,grappelli,grappelli_contextmenu,template',
+    plugins: 'advimage,advlink,fullscreen,paste,media,searchreplace,template',
     
     // Theme Advanced
     theme_advanced_toolbar_location: 'top',

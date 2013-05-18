@@ -39,7 +39,7 @@ EXTENSIONS = getattr(settings, "FILEBROWSER_EXTENSIONS", {
     'Folder': [''],
     'Image': ['.jpg','.jpeg','.gif','.png','.tif','.tiff'],
     'Document': ['.pdf','.doc','.rtf','.txt','.xls','.csv'],
-    'Video': ['.mov','.wmv','.mpeg','.mpg','.avi','.rm'],
+    'Video': ['.mov','.wmv','.mpeg','.mpg','.avi','.rm', '.mkv'],
     'Audio': ['.mp3','.mp4','.wav','.aiff','.midi','.m4p']
 })
 # Define different formats for allowed selections.

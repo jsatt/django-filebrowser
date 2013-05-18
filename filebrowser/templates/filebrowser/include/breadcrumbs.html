@@ -1,27 +1,28 @@
 {% load i18n fb_tags %}
 {% load url from future %}
 
-<ul class="grp-horizontal-list">
-    {% if not query.pop %}
-        <li><a href="../../">{% trans "Home" %}</a></li>
-    {% endif %}
+<div class="breadcrumbs">
+    <a href="../../">{% trans "Home" %}</a>
+    &rsaquo;
     {% if breadcrumbs or breadcrumbs_title %}
-        <li><a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}">{% trans 'FileBrowser' %}</a></li>
+        <a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}">{% trans 'FileBrowser' %}</a>
     {% else %}
-        <li>{% trans 'FileBrowser' %}</li>
+        {% trans 'FileBrowser' %}
     {% endif %}
     {% for item in breadcrumbs %}
+        &rsaquo;
         {% if not forloop.last %}
-            <li><a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a></li>
+            <a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a>
         {% else %}
             {% if breadcrumbs_title %}
-                <li><a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a></li>
+                <a href="{% url 'filebrowser:fb_browse' %}{% query_string "" "q,dir,filename,p" %}&amp;dir={{ item.1|urlencode }}">{{ item.0 }}</a>
             {% else %}
-                <li>{{ item.0 }}</li>
+                {{ item.0 }}
             {% endif %}
         {% endif %}
     {% endfor %}
     {% if breadcrumbs_title %}
-        <li>{{ breadcrumbs_title }}</li>
+        &rsaquo;
+        {{ breadcrumbs_title }}
     {% endif %}
-</ul>
+</div>

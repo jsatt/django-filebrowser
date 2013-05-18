@@ -125,13 +125,12 @@ class FileBrowserSite(object):
         urlpatterns = patterns('',
     
             # filebrowser urls (views)
-            url(r'^browse/$', path_exists(self, self.filebrowser_view(self.browse)), name="fb_browse"),
+            url(r'^$', path_exists(self, self.filebrowser_view(self.browse)), name="fb_browse"),
             url(r'^createdir/', path_exists(self, self.filebrowser_view(self.createdir)), name="fb_createdir"),
             url(r'^upload/', path_exists(self, self.filebrowser_view(self.upload)), name="fb_upload"),
             url(r'^delete_confirm/$', file_exists(self, path_exists(self, self.filebrowser_view(self.delete_confirm))), name="fb_delete_confirm"),
             url(r'^delete/$', file_exists(self, path_exists(self, self.filebrowser_view(self.delete))), name="fb_delete"),
             url(r'^detail/$', file_exists(self, path_exists(self, self.filebrowser_view(self.detail))), name="fb_detail"),
-            url(r'^version/$', file_exists(self, path_exists(self, self.filebrowser_view(self.version))), name="fb_version"),
             # non-views
             url(r'^upload_file/$', staff_member_required(csrf_exempt(self._upload_file)), name="fb_do_upload"),
             
@@ -431,21 +430,6 @@ class FileBrowserSite(object):
             'settings_var': get_settings_var(directory=self.directory),
             'breadcrumbs': get_breadcrumbs(query, query.get('dir', '')),
             'breadcrumbs_title': u'%s' % fileobject.filename,
-            'filebrowser_site': self
-        }, context_instance=Context(request, current_app=self.name))
-
-    def version(self, request):
-        """
-        Version detail.
-        """
-        query = request.GET
-        path = u'%s' % os.path.join(self.directory, query.get('dir', ''))
-        fileobject = FileObject(os.path.join(path, query.get('filename', '')), site=self)
-        
-        return render_to_response('filebrowser/version.html', {
-            'fileobject': fileobject,
-            'query': query,
-            'settings_var': get_settings_var(directory=self.directory),
             'filebrowser_site': self
         }, context_instance=Context(request, current_app=self.name))
 
